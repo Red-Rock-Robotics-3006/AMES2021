@@ -40,6 +40,7 @@ public class RobotContainer {
    private final ExampleCommand m_autoCommand = new ExampleCommand(m_exampleSubsystem);
    private final ShooterSubsystem shooter = new ShooterSubsystem();
    private final IntakeSubsystem intake = new IntakeSubsystem();
+   private final GrabberSubsystem grabber = new GrabberSubsystem(false);
    
   private double shootPower = 0.5;
   private final MecanumDriveSubsystem mecanumDriveSubsystem = new MecanumDriveSubsystem();
@@ -139,7 +140,21 @@ public class RobotContainer {
       this.intake.lift(0.0);
     }));
 
+    new JoystickButton(mechStick, JoystickConstants.buttonLeftBumper)
+    .whenPressed(new InstantCommand(() -> {
+      grabber.moveToPosition(0.05);
+    }))
+    .whenReleased(new InstantCommand(() -> {
+      grabber.stop();
+    }));
 
+    new JoystickButton(mechStick, JoystickConstants.buttonRightBumper)
+    .whenPressed(new InstantCommand(() -> {
+      grabber.moveToPosition(-0.05);
+    }))
+    .whenReleased(new InstantCommand(() -> {
+      grabber.stop();
+    }));
   }
 
   /**
