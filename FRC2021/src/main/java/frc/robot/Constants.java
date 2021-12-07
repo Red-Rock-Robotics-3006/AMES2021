@@ -13,6 +13,13 @@ package frc.robot;
  * constants are needed, to reduce verbosity.
  */
 public final class Constants {
+
+    public static final class DriveConstants
+    {
+        public static final int kEncoderCPR = 2048;
+        public static final double kWheelDiameterMeters = 0.153;
+        public static final double kEncoderDistancePerPulse = (kWheelDiameterMeters * Math.PI) / ((double) kEncoderCPR * 10.71);
+    }
     public static final class JoystickConstants {
         //Gamepad values
         public static final int buttonY = 4;

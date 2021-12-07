@@ -13,6 +13,7 @@ import edu.wpi.first.wpilibj.Victor;
 import edu.wpi.first.wpilibj.VictorSP;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
+import frc.robot.Constants.JoystickConstants;
 
 /**
  * The VM is configured to automatically run this class, and to call the functions corresponding to
@@ -25,7 +26,7 @@ public class Robot extends TimedRobot {
 
   //private VictorSPX testMotor = new VictorSPX(1);
   
-  private Joystick drive = new Joystick(0);
+  private Joystick driveStick = new Joystick(0);
 
   private RobotContainer m_robotContainer;
 
@@ -93,7 +94,9 @@ public class Robot extends TimedRobot {
 
   /** This function is called periodically during operator control. */
   @Override
-  public void teleopPeriodic() {}
+  public void teleopPeriodic() {
+    
+  }
 
   @Override
   public void testInit() {
