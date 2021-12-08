@@ -15,6 +15,7 @@ import frc.robot.commands.ExampleCommand;
 import frc.robot.commands.IntakeLiftCommand;
 import frc.robot.commands.ShootCommand;
 import frc.robot.subsystems.ExampleSubsystem;
+import frc.robot.subsystems.GrabberSubsystem;
 import frc.robot.subsystems.IntakeSubsystem;
 import frc.robot.subsystems.MecanumDriveSubsystem;
 import frc.robot.subsystems.ShooterSubsystem;
@@ -40,7 +41,7 @@ public class RobotContainer {
    private final ExampleCommand m_autoCommand = new ExampleCommand(m_exampleSubsystem);
    private final ShooterSubsystem shooter = new ShooterSubsystem();
    private final IntakeSubsystem intake = new IntakeSubsystem();
-   private final GrabberSubsystem grabber = new GrabberSubsystem(false);
+   private final GrabberSubsystem grabber = new GrabberSubsystem(true);
    
   private double shootPower = 0.5;
   private final MecanumDriveSubsystem mecanumDriveSubsystem = new MecanumDriveSubsystem();
@@ -142,7 +143,8 @@ public class RobotContainer {
 
     new JoystickButton(mechStick, JoystickConstants.buttonLeftBumper)
     .whenPressed(new InstantCommand(() -> {
-      grabber.moveToPosition(0.05);
+      System.out.println("Left Bumper"); //Debug
+      grabber.moveToPosition(0.3);
     }))
     .whenReleased(new InstantCommand(() -> {
       grabber.stop();
@@ -150,7 +152,8 @@ public class RobotContainer {
 
     new JoystickButton(mechStick, JoystickConstants.buttonRightBumper)
     .whenPressed(new InstantCommand(() -> {
-      grabber.moveToPosition(-0.05);
+      System.out.println("Right Bumper"); //Debug
+      grabber.moveToPosition(-0.3);
     }))
     .whenReleased(new InstantCommand(() -> {
       grabber.stop();

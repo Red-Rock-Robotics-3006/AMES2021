@@ -13,9 +13,11 @@ import frc.robot.Constants.DriveConstants;
 
 public class GrabberSubsystem extends SubsystemBase {
 
-  private WPI_TalonFX liftMotor = new WPI_TalonFX(5); //Figure out device ID
+  private WPI_TalonFX liftMotor = new WPI_TalonFX(5);
 
-  private boolean isOpen = false;
+  private PIDController pid = new PIDController(0d, 0d, 0d);
+
+  private int openState = 0; //0 is closed; 1 is open; 2 is inbetween
   private boolean isEased; //Functionality to be added later with PID
 
   private final double OPEN_POS = 0.4;
@@ -45,11 +47,17 @@ public class GrabberSubsystem extends SubsystemBase {
   }
   private boolean reachedLimit()
   {
-    if(this.getPosition() >= this.OPEN_POS || this.getPosition() <= this.CLOSED_POS)
+    if(this.getPosition() >= this.OPEN_POS) 
     {
-      System.out.println("REACHED LIMIT");
+      this.openState = 1;
+      return true;
+    }
+    if (this.getPosition() <= this.CLOSED_POS)
+    {
+      this.openState = 0;
       return true; 
     }
+    this.openState = 2;
     return false; 
   }
 
@@ -57,16 +65,31 @@ public class GrabberSubsystem extends SubsystemBase {
   {
     if(reachedLimit()){
       this.stop();
-      System.out.println("REACHED LIMIT");
-      return true; 
+      return true;
     } else {
-      System.out.println("HERE");
-      move(power);
+      if (!isEased) this.move(power);
+      else { //Currently does not ease; Just for debug
+        System.out.println("Move: " + power);
+        System.out.println("PID: " + MathUtil.clamp(
+          pid.calculate( //Check if fractional position can be used like this or if raw position must be used
+              this.getPosition(),
+              power < 0 ? this.CLOSED_POS : this.OPEN_POS
+            )
+          ),
+          -power,
+          power
+        );
+        this.move(power);
+      }
       return false; 
     }
   }
   public void stop() {
-    move(0);
+    this.move(0);
+  }
+  public int getOpenState() 
+  {
+    return this.openState;
   }
 
   @Override
