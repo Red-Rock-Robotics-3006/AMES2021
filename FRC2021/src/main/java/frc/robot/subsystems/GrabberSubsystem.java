@@ -19,8 +19,8 @@ public class GrabberSubsystem extends SubsystemBase {
 
   private PIDController pid = new PIDController(0d, 0d, 0d);
 
-  private int state = 0; //0 is closed; 1 is open; 2 is inbetween
-  private boolean isEased; //Functionality to be added later with PID
+  private int state = 0; //0 is closed; 1 is open; 2 is in between
+  private boolean isEased;
 
   private final double OPEN_POS = 0.4;
   private final double CLOSED_POS = 0.1;
@@ -102,14 +102,14 @@ public class GrabberSubsystem extends SubsystemBase {
     this.move(0);
   }
   /**
-   * @return 0 for closed, 1 for open, and 2 for inbetween
+   * @return 0 for closed, 1 for open, and 2 for in between
    */
   public int getState() 
   {
     return this.state;
   }
   /**
-   * @return 0 for closed, 1 for open, and 2 for inbetween
+   * @return 0 for closed, 1 for open, and 2 for in between
    */
   public int getTarget()
   {

@@ -49,7 +49,7 @@ public class RobotContainer {
 
   private final WPI_TalonFX launcherMotor = new WPI_TalonFX(10);
   private final Joystick driveStick = new Joystick(0);
-  private final Joystick mechStick = new Joystick(1);
+  private final Joystick mechStick = new XboxController(1);
   
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
@@ -141,7 +141,7 @@ public class RobotContainer {
       this.intake.lift(0.0);
     }));
 
-    new JoystickButton(mechStick, JoystickConstants.buttonLeftBumper)
+    new Button(() -> mechStick.getBumper(GenericHID.Hand.kLeft))
     .whenPressed(new InstantCommand(() -> {
       System.out.println("Left Bumper"); //Debug
       grabber.moveToPosition(0.3);
@@ -150,7 +150,7 @@ public class RobotContainer {
       grabber.stop();
     }));
 
-    new JoystickButton(mechStick, JoystickConstants.buttonRightBumper)
+    new Button(() -> mechStick.getBumper(GenericHID.Hand.kRight))
     .whenPressed(new InstantCommand(() -> {
       System.out.println("Right Bumper"); //Debug
       grabber.moveToPosition(-0.3);
