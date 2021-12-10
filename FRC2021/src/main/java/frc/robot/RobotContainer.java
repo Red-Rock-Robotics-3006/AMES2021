@@ -49,7 +49,7 @@ public class RobotContainer {
 
   private final WPI_TalonFX launcherMotor = new WPI_TalonFX(10);
   private final Joystick driveStick = new Joystick(0);
-  private final Joystick mechStick = new XboxController(1);
+  private final XboxController mechStick = new XboxController(1);
   
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {

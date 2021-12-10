@@ -115,7 +115,7 @@ public class GrabberSubsystem extends SubsystemBase {
   {
     if(getPower() < 0) return 0;
     if(getPower() > 0) return 1;
-    if(getPower() == 0) return 2;
+    else return 2;
   }
 
   @Override
